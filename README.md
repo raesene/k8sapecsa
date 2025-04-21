@@ -2,11 +2,16 @@
 
 This is a repository to experiment with combinations of adding CAP_SYS_ADMIN/SYS_ADMIN to a pod alongside `allowPrivilegeEscalation: false` in relation to [this issue](https://github.com/kubernetes/kubernetes/issues/131336)
 
+## TL;DR.
+
+It *appears* from this that the logic which blocks a combination of `alllowPrivilegeEscalation: false` and adding `CAP_SYS_ADMIN` to a pod has no effect, as `CAP_SYS_ADMIN` is not the right string to add that capability, it's actually `SYS_ADMIN`.
+
+Also Kubernetes has no validation on added capabilites, so if you get the name wrong it'll happily create it :)
 
 ## Manifests
 
-- `capsysadminpod.yaml` - This pod adds CAP_SYS_ADMIN to the capabilities list
-- `sysadminpod.yaml` - This pod adds SYS_ADMIN to the capabilities list
+- `capsysadminpod.yaml` - This pod adds `CAP_SYS_ADMIN` to the capabilities list
+- `sysadminpod.yaml` - This pod adds `SYS_ADMIN` to the capabilities list
 - `dontallowprivesccapsysadminpod.yaml` - This has `allowPrivilegeEscalation: false` set and adds `CAP_SYS_ADMIN` to the capabilities list
 - `dontallowprivescsysadminpod.yaml` - This has `allowPrivilegeEscalation: false` set and adds `SYS_ADMIN` to the capabilities list
 - `invalidcap.yaml` - This pod has an invalid capability (lorem) set.
