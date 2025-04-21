@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-sys-admin
+spec:
+  containers:
+  - name: pod-with-sys-admin
+    image: ctrsec/tools:latest
+    securityContext:
+      capabilities:
+        add:
+          - SYS_ADMIN

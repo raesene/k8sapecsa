@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-invalid-capability
+spec:
+  containers:
+  - name: pod-with-invalid-capability
+    image: ctrsec/tools:latest
+    securityContext:
+      capabilities:
+        add:
+          - LOREM
